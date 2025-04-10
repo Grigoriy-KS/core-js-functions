@@ -32,8 +32,9 @@ function getCurrentFunctionName() {
  *   getFunctionBody(hiHello) => "function hiHello() { console.log('hello world'); }"
  *
  */
-function getFunctionBody(/* func */) {
-  throw new Error('Not implemented');
+function getFunctionBody(func) {
+  // return func === undefined || func === null ? '' : func.toString();
+  return typeof func === 'function' ? func.toString() : '';
 }
 
 /**
