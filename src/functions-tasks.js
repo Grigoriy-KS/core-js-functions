@@ -208,8 +208,16 @@ function logger(func, logFunc) {
  *   partialUsingArguments(fn, 'a','b','c')('d') => 'abcd'
  *   partialUsingArguments(fn, 'a','b','c','d')() => 'abcd'
  */
-function partialUsingArguments(/* fn, ...args1 */) {
-  throw new Error('Not implemented');
+function partialUsingArguments(fn, ...args1) {
+  const argumentsTotalNumber = fn.length;
+  return function functionWithPartialAppliedArguments(...args2) {
+    if (args1.length + args2.length !== argumentsTotalNumber) {
+      throw new Error(
+        'The number of arguments is not equal to the number of function parameters'
+      );
+    }
+    return fn(...args1, ...args2);
+  };
 }
 
 /**
