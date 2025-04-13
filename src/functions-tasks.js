@@ -146,8 +146,19 @@ function memoize(func) {
  * }, 2);
  * retryer() => 2
  */
-function retry(/* func, attempts */) {
-  throw new Error('Not implemented');
+function retry(func, attempts) {
+  let attemptsCounter = attempts;
+  const maxAttempts = attempts;
+  return function retryer(...args) {
+    while (attemptsCounter > 0) {
+      try {
+        return func(...args);
+      } catch (e) {
+        attemptsCounter -= 1;
+      }
+    }
+    return `Max attempts: ${maxAttempts}`;
+  };
 }
 
 /**
